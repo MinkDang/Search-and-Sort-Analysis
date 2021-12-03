@@ -57,7 +57,26 @@ Data setup
 
 * Binary Search: 2 seconds
 * Linear Search - *Sorted*, Linear Search - *Unsorted*: 4 minutes each → 8 minutes in total
-* Graphing - 5 to 10 seconds
+* Graphing - 2 seconds
+
+### Deepnote Testing:
+
+https://deepnote.com/project/Search-and-Sort-Analysis-eUaFHUuuT5acWy-01VhYnA/%2FSearch-and-Sort-Analysis%2FSearch_v2.ipynb
+
+Computer: **Free Plan**
+
+Data Setup:
+
+* Seed: 1
+* Min: 1
+* Max: 1,000,000
+* Array length before duplication removal: 100,000
+
+**Result**
+
+* Binary Search: 2 seconds
+* Linear Search - *Sorted*, Linear Search - *Unsorted*: 17 minutes each → 35 minutes in total
+* Graphing - 2 seconds
 
 ---
 
