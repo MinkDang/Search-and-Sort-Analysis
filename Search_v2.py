@@ -15,7 +15,7 @@ from timeit import default_timer as timer
 from IPython.display import clear_output
 
 # %% [markdown]
-# ### Ramdom setup
+# ### Ramdom setup + Linear Search Confirmation
 
 # %%
 def int_check(prompt, top = None):
@@ -26,7 +26,7 @@ def int_check(prompt, top = None):
             print("Check input")
             continue
         
-        if top is None and value < 0:
+        if value < 0:
             print("Please input a number larger than 0")
             continue
 
@@ -36,14 +36,13 @@ def int_check(prompt, top = None):
         clear_output()
         return value
 
+seed_info = int_check("Choose your seed ( ≥ 0 ): ")
 
-seed_info = int_check("Choose your seed ( > 0 ): ")
+range_low = int_check("Choose the bottom end of your randomness ( ≥ 0 ): ")
 
-range_low = int_check("Choose the bottom end of your randomness ( > 0 ): ")
+range_high = int_check("Choose the top end of your randomness ( ≥ 0 ): ", True)
 
-range_high = int_check("Choose the top end of your randomness ( > 0 ): ", True)
-
-random_size = int_check("Choose the size of the array ( > 0 ): ")
+random_size = int_check("Choose the size of the array ( ≥ 0 ): ")
 
 np.random.seed(seed_info)
 
@@ -116,7 +115,7 @@ def LinearSearch(arraytosearch):
         if tofind == item:
             end = timer() # Performance - End timer
             found = True
-            return start, end, found   
+            return start, end, found
 
 # %% [markdown]
 # ### *Unsorted* array
@@ -162,11 +161,15 @@ if exec_sort.lower() == 'yes':
 # *log(n)* trend line
 
 # %%
-plt.figure()
-ax1 = dict_binary_df.plot(x = 'Number', y = 'Time (microseconds)', kind = 'scatter', figsize = (30 , 10), fontsize = 14, loglog = True)
-ax1.set_ylabel('Time (microseconds)',fontdict={'fontsize' : 15})
-ax1.set_xlabel('Number',fontdict={'fontsize' : 15})
-ax1.set_title('Binary Search Performance', fontdict={'fontsize': 15})
+fig1 = dict_binary_df.plot(x = 'Number', y = 'Time (microseconds)', kind = 'scatter', figsize = (30 , 10), fontsize = 14, loglog = True, c = 'firebrick')
+
+fig1.set_ylabel('Time (microseconds)', fontdict = {'fontsize': 15})
+fig1.set_xlabel('Number (n)', fontdict = {'fontsize': 15})
+
+fig1.set_title('Binary Search Performance', fontdict = {'fontsize': 15})
+
+plt.show()
+plt.close()
 
 # %% [markdown]
 # ### Linear Search
@@ -176,21 +179,61 @@ ax1.set_title('Binary Search Performance', fontdict={'fontsize': 15})
 
 # %%
 if exec_unsort.lower() == 'yes':
-    plt.figure()
-    ax2 = dict_linear_unsorted_df.plot(x = 'Number', y = 'Time (microseconds)', kind = 'scatter', figsize = (30 , 10), fontsize = 14, loglog = True)
-    ax2.set_ylabel('Time (microseconds)',fontdict={'fontsize' : 15})
-    ax2.set_xlabel('Number',fontdict={'fontsize' : 15})
-    ax2.set_title('Linear Search - Unsorted - Performance', fontdict={'fontsize': 15})
+    fig2 = dict_linear_unsorted_df.plot(x = 'Number', y = 'Time (microseconds)', kind = 'scatter', figsize = (30 , 10), fontsize = 20, loglog = True, c = 'sandybrown')
+
+    fig2.set_ylabel('Time (microseconds)', fontdict = {'fontsize': 15})
+    fig2.set_xlabel('Number (n)', fontdict = {'fontsize': 15})
+    
+    fig2.set_title('Linear Search - Unsorted - Performance', fontdict = {'fontsize': 17})
+    
+    plt.show()
+    plt.close()
 
 # %% [markdown]
 # #### Sorted Array
 
 # %%
 if exec_sort.lower() == 'yes':
-    plt.figure()
-    ax3 = dict_linear_sorted_df.plot(x = 'Number', y = 'Time (microseconds)', kind = 'scatter', figsize = (30 , 10), fontsize = 14, loglog = True)
-    ax3.set_ylabel('Time (microseconds)',fontdict={'fontsize' : 15})
-    ax3.set_xlabel('Number',fontdict={'fontsize' : 15})
-    ax3.set_title('Linear Search - Sorted - Performance', fontdict={'fontsize': 15})
+    fig3 = dict_linear_sorted_df.plot(x = 'Number', y = 'Time (microseconds)', kind = 'scatter', figsize = (30 , 10), fontsize = 20, loglog = True, c = 'darkgoldenrod')
+
+    fig3.set_ylabel('Time (microseconds)', fontdict = {'fontsize': 15})
+    fig3.set_xlabel('Number (n)', fontdict = {'fontsize': 15})
+
+    fig3.set_title('Linear Search - Sorted - Performance', fontdict = {'fontsize': 17})
+    
+    plt.show()
+    plt.close()
+
+# %% [markdown]
+# ### Combined graphs
+
+# %%
+fig_combined = dict_binary_df.plot(x = 'Number', y = 'Time (microseconds)', kind = 'scatter', figsize = (30 , 10), fontsize = 20, loglog = True, label = 'Binary Search', c = 'firebrick', zorder = 3)
+
+if exec_sort.lower() == 'yes':
+    dict_linear_sorted_df.plot(x = 'Number', y = 'Time (microseconds)', kind = 'scatter', label = 'Linear Search - Sorted', c = 'darkgoldenrod', ax = fig_combined, zorder = 2)
+
+if exec_unsort.lower() == 'yes':
+    dict_linear_unsorted_df.plot(x = 'Number', y = 'Time (microseconds)', kind = 'scatter', label = 'Linear Search - Unsorted', c = 'sandybrown', ax = fig_combined)
+
+details = 'DATA: Seed: ' + str(seed_info) + '; Min: ' + str(range_low) + '; Max: ' + str(range_high) + '; Length of array: ' + str(unique_arr_sorted.size) + ' (Duplicates Removed: ' + str(arr.size - unique_arr_sorted.size) + ')' 
+
+fig_combined.grid(axis = 'y', linestyle = (0, (5, 10)))
+fig_combined.set_ylabel('Time (mircoseconds)', fontdict = {'fontsize': 15})
+fig_combined.set_xlabel('''Number (n)
+
+{}'''.format(details), fontdict = {'fontsize': 15})
+fig_combined.set_title('Search Performance Visualisation', fontdict = {'fontsize': 17})
+
+lgnd = fig_combined.legend(loc = "upper left", scatterpoints = 1, fontsize = 15)
+for handle in lgnd.legendHandles:
+    handle.set_sizes([100])
+
+save_fig = input("Would you like to save the plot in high resolutions (yes): ")
+if save_fig.lower() == 'yes':
+    plt.savefig('Binary_Linear Search Comparison.png', dpi = 300, facecolor = 'white', transparent = False, bbox_inches = 'tight')
+
+plt.show()
+plt.close()
 
 
