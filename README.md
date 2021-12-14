@@ -4,60 +4,46 @@
 
 1. `Search_v1`: Search for 1 item with time taken details included
 2. `Search_v2`: Automated search for all values within array, returning *performance visualisation* between different search algorithms
+3. `Sort_v1`: Sort an customise array and return bar chart visualisation
 
 ## 📍 Requirements
 
 ### 🛠 Language: **Python 3.6** or above
 
-### 📦 Libraries:
+### 📦 Libraries
 
 These can be installed through running the `start.bat` file **(Windows only)**
 
 Install manually through your system terminal through `pip install package` *(e.g: `pip install pandas`)*
 
-* numpy
-* ipython
-* pandas *(Not used in version 1)*
-* matplotlib *(Not used in version 1)*
+numpy | ipython | pandas | matplotlib
+--- | --- | --- | ---
+Search_v1 | Search_v1 |  
+Search_v2 | Search_v2 | Search_v2 | Search_v2
+Sort_v1 | Sort_v1 
 
 ## 🗝 Operation
 
-1. `.ipynb` is a **recommended** format, to be used in environments that allow Jupyter Notebook execution
+1. `.ipynb` is the **recommended** format, to be used in environments that allow Jupyter Notebook execution
 
 2. `.py` can be executed by running `start.bat` file or from your system terminal
 
-> What VERSION are you running (1 or 2)?
-
-Possible input
-* `1` for `Search_v1.py`
-* `2` for `Search_v2.py`
+> Batch script is case sensitive
 
 ---
 
 ## ⏳ Performance notes
 
-    Please note that LINEAR search will consume much more performance and time than BINARY search
+**Linear** Search is time, power - consuming.
 
-### Testing specs:
+**Sorting** is not very time-efficient with longer arrays.
 
-Computer
 
-* CPU: Intel(R) Core(TM) i5-1035G1 CPU @ 1.00GHz, 1190 Mhz, 4 Core(s), 8 Logical Processor(s)
-* RAM: 16GB
-* CPU Usage: 50% by `python.exe`
+## 💊 Testing
+Search_v1 | Search_v2 | Sort_v1
+--- | --- | ---
+[Deepnote](https://deepnote.com/project/Search-and-Sort-Analysis-eUaFHUuuT5acWy-01VhYnA/%2FSearch_v1.ipynb) | [Deepnote](https://deepnote.com/project/Search-and-Sort-Analysis-eUaFHUuuT5acWy-01VhYnA/%2FSearch_v2.ipynb) | [Deepnote](https://deepnote.com/project/Search-and-Sort-Analysis-eUaFHUuuT5acWy-01VhYnA/%2FSort_v1.ipynb)
 
-Data setup
-
-* Seed: 1
-* Min: 1
-* Max: 1,000,000
-* Array length before duplication removal: 100,000
-
-**Result**:
-
-* Binary Search: 2 seconds
-* Linear Search - *Sorted*, Linear Search - *Unsorted*: 4 minutes each → 8 minutes in total
-* Graphing - 5 to 10 seconds
 
 ---
 
@@ -65,17 +51,13 @@ Data setup
 
 ### __Online cloud computing service__ for Jupyter Notebook
 
-* [Deepnote](https://deepnote.com/)
-* [Replit](https://replit.com/)
-* [Datalore (from JetBrains)](https://datalore.jetbrains.com/)
-* [Google Colab](https://colab.research.google.com/)
-* [Binder](https://mybinder.org/)
+[Deepnote](https://deepnote.com/), [Replit](https://replit.com/), [Datalore (from JetBrains)](https://datalore.jetbrains.com/), [Google Colab](https://colab.research.google.com/), [Binder](https://mybinder.org/)
 
 Performance are limited unless paid versions are in used
 
 ### Jupyter Notebook website
 
-<https://mybinder.org/>
+<https://jupyter.org/>
 
 ### Visual Studio Code useful links
 
@@ -91,3 +73,7 @@ Performance are limited unless paid versions are in used
 * [pandas](https://pandas.pydata.org/pandas-docs/stable/index.html)
 * [numpy](https://numpy.org/doc/stable/index.html)
 * [jupyter](https://jupyter.readthedocs.io/en/latest/)
+
+### StackOverflow
+
+* [Clear Jupyter Notebook output on every commit](https://stackoverflow.com/a/58004619/14046889)
