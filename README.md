@@ -20,7 +20,7 @@ numpy | ipython | pandas | matplotlib
 --- | --- | --- | ---
 Search_v1 | Search_v1 |  
 Search_v2 | Search_v2 | Search_v2 | Search_v2
-Sort_v1 | Sort_v1 
+Sort_v1 | Sort_v1
 
 ## 🗝 Operation
 
@@ -38,12 +38,11 @@ Sort_v1 | Sort_v1
 
 **Sorting** is not very time-efficient with longer arrays.
 
-
 ## 💊 Testing
+
 Search_v1 | Search_v2 | Sort_v1
 --- | --- | ---
 [Deepnote](https://deepnote.com/project/Search-and-Sort-Analysis-eUaFHUuuT5acWy-01VhYnA/%2FSearch_v1.ipynb) | [Deepnote](https://deepnote.com/project/Search-and-Sort-Analysis-eUaFHUuuT5acWy-01VhYnA/%2FSearch_v2.ipynb) | [Deepnote](https://deepnote.com/project/Search-and-Sort-Analysis-eUaFHUuuT5acWy-01VhYnA/%2FSort_v1.ipynb)
-
 
 ---
 
