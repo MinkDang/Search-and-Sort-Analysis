@@ -56,7 +56,7 @@
 **Sorting** is not time-efficient, adjust the parameters wisely
 
 - **Bubble sort (*Unoptimized*)** -- 4 times longer than *Insertion Sort*
-- **Bubble sort (*Unoptimized*)** -- 2 times longer than *Insertion Sort*
+- **Bubble sort (*Optimized*)** -- 2 times longer than *Insertion Sort*
 - In `Sort_v2`, the recommend **upper limit** is **1000** as higher parameters would led to long execution time, ~~*turning your computer into a jet engine*~~ slowing other processes within your computer
 
 ### 💊 Testing
