@@ -10,8 +10,8 @@
 # %%
 import numpy as np
 import matplotlib.pyplot as plt
-from timeit import default_timer as timer
 from IPython.display import clear_output
+from timeit import default_timer as timer
 
 # %% [markdown]
 # ### Data processing
@@ -21,7 +21,8 @@ from IPython.display import clear_output
 # Import CSV with filter from <https://simplemaps.com/data/world-cities>
 
 # %%
-cities = np.loadtxt('CSVs/simplemaps_worldcities_basicv1.74/worldcities.csv',delimiter=',', dtype=object, encoding='utf-8', usecols = [1], skiprows=1)
+cities = np.loadtxt('CSVs/simplemaps_worldcities_basicv1.74/worldcities.csv', 
+delimiter = ',', usecols = [1], skiprows = 1, dtype = object, encoding = 'utf-8')
 
 # %% [markdown]
 # Sample size customisation
@@ -32,8 +33,11 @@ def int_check(prompt, no_zero = None):
         try:
             value = int(input(prompt))
         except ValueError:
-            print("Check input")
-            continue
+            if no_zero is None:
+                value = np.random.randint(np.iinfo(np.int32).max)
+            else:
+                print("Check input")
+                continue
         
         if no_zero is None and value < 0:
             print("Please input a number larger or equal to 0")
@@ -46,7 +50,7 @@ def int_check(prompt, no_zero = None):
         clear_output()
         return value
 
-seed_info = int_check('Choose your seed ( ≥ 0 ): ')
+seed_info = int_check('Choose your seed ( ≥ 0 ): ') # If ValueError then a random seed between 0 and top limit of int32 would be selected
 np.random.seed(seed_info)
 
 sample_size = int_check('Choose your sample size ( > 0 and ≤ 41001): ', True)
@@ -84,11 +88,11 @@ def Insertion_sort(tosort, descending = None):
     
     end = timer() # Performance - End timer
 
-    return new_reference, (end - start)*10**6
+    return (end - start)*10**6
 
-insertion_ascending, benchmark_insertion_ascending = Insertion_sort(cities_selection)
-insertion_descending, benchmark_insertion_descending = Insertion_sort(cities_selection, True)
-print(f"INSERTION Sort\nAscending: {benchmark_insertion_ascending} microseconds\nDescending: {benchmark_insertion_descending} mircroseconds")
+insertion_ascending = Insertion_sort(cities_selection)
+insertion_descending = Insertion_sort(cities_selection, True)
+print(f"INSERTION Sort\nAscending: {insertion_ascending} microseconds\nDescending: {insertion_descending} mircroseconds")
 
 # %% [markdown]
 # ## **_Selection_ sort**
@@ -119,11 +123,11 @@ def Selection_sort(tosort, descending = None):
     
     end = timer() # Performance - End timer
     
-    return new_reference, (end - start)*10**6
+    return (end - start)*10**6
 
-selection_ascending, benchmark_selection_ascending = Selection_sort(cities_selection)
-selection_descending, benchmark_selection_descending = Selection_sort(cities_selection, True)
-print(f"SELECTION Sort\nAscending: {benchmark_selection_ascending} microseconds\nDescending: {benchmark_selection_descending} mircroseconds")
+selection_ascending = Selection_sort(cities_selection)
+selection_descending = Selection_sort(cities_selection, True)
+print(f"SELECTION Sort\nAscending: {selection_ascending} microseconds\nDescending: {selection_descending} mircroseconds")
 
 # %% [markdown]
 # ## **_Bubble_ sort**
@@ -152,11 +156,11 @@ def Bubble_sort(tosort, descending = None):
     
     end = timer() # Performance - End timer
     
-    return new_reference, (end - start)*10**6
+    return (end - start)*10**6
 
-bubble_1_ascending, benchmark_bubble_1_ascending = Bubble_sort(cities_selection)
-bubble_1_descending, benchmark_bubble_1_descending = Bubble_sort(cities_selection, True)
-print(f"BUBBLE Sort\nAscending: {benchmark_bubble_1_ascending} microseconds\nDescending: {benchmark_bubble_1_descending} mircroseconds")
+bubble_1_ascending = Bubble_sort(cities_selection)
+bubble_1_descending = Bubble_sort(cities_selection, True)
+print(f"BUBBLE Sort\nAscending: {bubble_1_ascending} microseconds\nDescending: {bubble_1_descending} mircroseconds")
 
 # %% [markdown]
 # ## **_Bubble_ sort** (Optimised)
@@ -184,11 +188,11 @@ def Bubble_sort_optimised(tosort, descending = None):
 
     end = timer() # Performance - End timer
 
-    return new_reference, (end - start)*10**6
+    return (end - start)*10**6
 
-bubble_2_ascending, benchmark_bubble_2_ascending = Bubble_sort_optimised(cities_selection)
-bubble_2_descending, benchmark_bubble_2_descending = Bubble_sort_optimised(cities_selection, True)
-print(f"BUBBLE Sort (Optimised)\nAscending: {benchmark_bubble_2_ascending} microseconds\nDescending: {benchmark_bubble_2_descending} mircroseconds")
+bubble_2_ascending = Bubble_sort_optimised(cities_selection)
+bubble_2_descending = Bubble_sort_optimised(cities_selection, True)
+print(f"BUBBLE Sort (Optimised)\nAscending: {bubble_2_ascending} microseconds\nDescending: {bubble_2_descending} mircroseconds")
 
 # %% [markdown]
 # ## Result Visualisation
@@ -196,8 +200,8 @@ print(f"BUBBLE Sort (Optimised)\nAscending: {benchmark_bubble_2_ascending} micro
 
 # %%
 labels = ['Insertion', 'Selection', 'Bubble', 'Bubble (Optimised)']
-ascending_list = [benchmark_insertion_ascending, benchmark_selection_ascending, benchmark_bubble_1_ascending, benchmark_bubble_2_ascending]
-descending_list = [benchmark_insertion_descending, benchmark_selection_descending, benchmark_bubble_1_descending, benchmark_bubble_2_descending]
+ascending_list = [insertion_ascending, selection_ascending, bubble_1_ascending, bubble_2_ascending]
+descending_list = [insertion_descending, selection_descending, bubble_1_descending, bubble_2_descending]
 
 for i in range(4):
     ascending_list[i] = int(ascending_list[i])
@@ -232,6 +236,10 @@ ax.legend(loc = 'upper left')
 bbox = dict(boxstyle="round", ec="w", fc="k", alpha=.75)
 ax.bar_label(rects1, label_type = 'center', c = 'w', fmt = '%d', bbox = bbox, fontsize = 18, padding = -10)
 ax.bar_label(rects2, label_type = 'center', c = 'w', fmt = '%d', bbox = bbox, fontsize = 18, padding = 10)
+
+save_fig = input("Would you like to save the plot in high resolutions (yes): ")
+if save_fig.lower() == 'yes':
+    plt.savefig('Sort_v1 comparison.png', dpi = 300, facecolor = 'w', transparent = False, bbox_inches = 'tight')
 
 plt.show()
 
