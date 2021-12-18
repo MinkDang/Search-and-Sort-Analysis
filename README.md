@@ -45,6 +45,13 @@
 
 [batch]: start.bat
 
+## 📥 Download
+
+Check [releases](https://github.com/MinkDang/Search-and-Sort-Analysis/releases) for more details
+
+1. Python: [`.zip`](https://github.com/MinkDang/Search-and-Sort-Analysis/releases/download/v1.0_Python/Search.and.Sort.Analysis.Python.zip)
+
+2. Jupyter Notebooks: [`.zip`](https://github.com/MinkDang/Search-and-Sort-Analysis/releases/download/v1.0_Jupyter-Notebook/Search.and.Sort.Analysis.Jupyter.Notebooks.zip)
 ---
 
 ## ⏳ Performance
